@@ -78,7 +78,8 @@ rule all:
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.fix_RG.bam",sample=SAMPLES),
         expand("../fpkm/{sample}",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam",sample=SAMPLES),
-        expand("../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.bam",sample=SAMPLES)
+        expand("../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.bam",sample=SAMPLES),
+        expand("../bam/293T-RNASeq-{sample}_Aligned.out.bam.bai",sample=SAMPLES)
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # cutadapter
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -93,7 +94,6 @@ rule TruSeq_cutadapt:
         "../fix.fastq/293T-RNASeq-{sample}_cutadapt.log"
     shell:# using illumina universal adaptor
         """
-        srun -T 24 -c 24 \
         {CUTADAPT} -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25 \
         -m 55 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC \
         -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT \
@@ -114,7 +114,7 @@ rule STAR_mapping:
     params:
         "../bam/293T-RNASeq-{sample}_"
     shell:
-        "srun -T 24 -c 24 \
+        """
         {STAR} \
         --genomeDir {STAR_HG38_INDEX} \
         --runThreadN 24 \
@@ -123,7 +123,8 @@ rule STAR_mapping:
         --outFileNamePrefix {params} \
         --outSAMtype BAM Unsorted \
         --outSAMstrandField intronMotif \
-        --outFilterIntronMotifs RemoveNoncanonical > {log} 2>&1"
+        --outFilterIntronMotifs RemoveNoncanonical > {log} 2>&1
+        """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # add @RG tag (mostly for GATK SNP/SNV calling)
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -135,7 +136,9 @@ rule add_RG_tag:
     params:
         tag = "'@RG\\tID:{sample}\\tSM:{sample}\\tPL:ILLUMINA'"
     shell:
-        "srun -T 24 samtools addreplacerg -r {params.tag} -@ 24 -O BAM -o {output} --reference {HG38_FA_DICT} {input}"
+        """
+        samtools addreplacerg -r {params.tag} -@ 24 -O BAM -o {output} --reference {HG38_FA_DICT} {input}
+        """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # cufflinks calculate FPKM
 # ------------------------------------------------------------------------------------------>>>>>>>>>>     
@@ -146,7 +149,6 @@ rule cufflinks_FPKM:
         directory('../fpkm/{sample}')
     shell:
         """
-        srun -T 24 -c 24 \
         {CUFFLINKS} -p 24 --library-type fr-firststrand \
         -G {HG39_GTF} \
         -o {output} \
@@ -162,7 +164,6 @@ rule BAM_sort_by_position:
         "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
     shell:
         """
-        srun -T 24 -c 24 \
         samtools sort \
         -O BAM \
         -o {output} \
@@ -183,7 +184,6 @@ rule BAM_mark_duplicate:
         "../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.log"
     shell:
         """
-        srun -T 24 -c 24 \
         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
         -jar {PICARD} MarkDuplicates \
         I={input} \
@@ -201,233 +201,7 @@ rule BAM_index:
         "../bam/293T-RNASeq-{sample}_Aligned.out.bam.bai"
     shell:
         """
-        srun -T 24 -c 24 \
         samtools index -@ 24 \
         {input} \
         {output}
-        """   
-
-
-
-# ##############################
-# # all
-# ##############################
-# rule all:
-#     input:
-#         expand("0.sort_bam/{sample}_Aligned_sort.bam",sample=SAMPLES),
-# #         expand("0.sort_bam/{sample}_Aligned_sortn.bam",sample=SAMPLES),
-# #         expand("0.sort_bam/{sample}_Aligned_sortn_fixmate.bam",sample=SAMPLES),
-#         expand("bam/{sample}_Aligned_sortn_rmDup.bam",sample=SAMPLES),
-#         expand("bam/{sample}_Aligned_sortn_SplitNCigar.bam",sample=SAMPLES)
-# ##############################
-# # add RG tag
-# ##############################
-# rule add_RG_tag:
-#     input:
-#         "0.sort_bam/{sample}.bam"
-#     output:
-#         "0.sort_bam/{sample}_Aligned.out.fix_RG.bam"
-#     params:
-#         tag = "'@RG\\tID:{sample}\\tSM:{sample}\\tPL:ILLUMINA'"
-#     shell:
-#         """
-#         srun -T 24 -c 24 \
-#         samtools addreplacerg -@ 24 \
-#         -r {params.tag} \
-#         -O BAM -o {output} \
-#         --reference {HG38_FA} \
-#         {input}
-#         """
-# #############################
-# # sort bam on position
-# #############################
-# rule samtools_sort_by_position:
-#     input:
-#         "0.sort_bam/{sample}_Aligned.out.fix_RG.bam"
-#     output:
-#         "0.sort_bam/{sample}_Aligned_sort.bam"
-#     log:
-#         "0.sort_bam/{sample}_Aligned_sort.bam.log"
-#     shell:
-#         """
-#         srun -T 24 -c 24 \
-#         samtools sort -@ 24 \
-#         -O BAM -o {output} \
-#         -T {output}.temp \
-#         -m 4G \
-#         {input} 2>{log}
-#         """
-
-# rule GATK_mark_duplicate:
-#     input:
-#         "0.sort_bam/{sample}_Aligned_sort.bam"
-#     output:
-#         "bam/{sample}_Aligned_sortn_rmDup.bam",
-#         "bam/{sample}_Aligned_sortn_rmDup.matrix"
-#     params:
-#         aso = r"queryname",
-#     log:
-#         "bam/{sample}_Aligned_sortn_rmDup.bam.log"
-#     shell:
-#         """
-#         srun -T 24 -c 24 \
-#         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-#         -jar {GATK4} \
-#         MarkDuplicates \
-#         --INPUT {input} \
-#         --OUTPUT {output[0]} \
-#         --METRICS_FILE {output[1]} \
-#         --ASSUME_SORT_ORDER '{params.aso}' \
-#         --CREATE_MD5_FILE false \
-#         --REMOVE_DUPLICATES true 2>{log}
-#         """
-# ##############################
-# # SplitNCigarReads for RNA(DNA no need)
-# ##############################
-# rule GATK_SplitNCigarReads:
-#     input:
-#         "bam/{sample}_Aligned_sortn_rmDup.bam"
-#     output:
-#         "bam/{sample}_Aligned_sortn_SplitNCigar.bam"
-#     log:
-#         "bam/{sample}_Aligned_sortn_SplitNCigar.bam.log"
-#     shell:
-#         """
-#         srun -T 24 -c 24 \
-#         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-#         -jar {GATK4} \
-#         SplitNCigarReads \
-#         -I {input} \
-#         -O {output} \
-#         -R {HG38_FA} 2>{log}
-#         """ 
-        
-        
-        
-        
-        
-
-# # ##############################
-# # # HaplotypeCaller -> g.vcf
-# # ##############################
-# # rule GATK_HaplotypeCaller:
-# #     input:
-# #         "bam/{sample}_Aligned_sort_MarkDup.bam"
-# #     output:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_raw_variants.vcf"
-# #     log:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_raw_variants.vcf.log"
-# #     shell:
-# #         """
-# #         srun -T 24 -c 24 \
-# #         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-# #         -jar {GATK4} \
-# #         HaplotypeCaller \
-# #         -I {input} \
-# #         -O {output} \
-# #         -R {HG38_FA} 2>{log}
-# #         """ 
-# # ##############################
-# # # SelectVariants SNP
-# # ############################## 
-# # rule GATK_SelectVariants_SNP:
-# #     input:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_raw_variants.vcf"
-# #     output:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_select_variants_SNP.vcf"
-# #     log:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_select_variants_SNP.log"
-# #     shell:
-# #         """
-# #         srun -T 24 -c 24 \
-# #         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-# #         -jar {GATK4} \
-# #         SelectVariants \
-# #         -select-type SNP \
-# #         -V {input} \
-# #         -O {output} 2>{log}
-# #         """
-
-# # ##############################
-# # # VariantFiltration SNP
-# # ##############################
-# # rule GATK_VariantFiltration_SNP:
-# #     input:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_select_variants_SNP.vcf"
-# #     output:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_SNP.vcf"
-# #     log:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_SNP.log"
-# #     shell:
-# #         """
-# #         srun -T 24 -c 24 \
-# #         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-# #         -jar {GATK4} \
-# #         VariantFiltration \
-# #         --filter-expression "QD < 2.0 || MQ < 40.0 || FS > 60.0 || SOR > 3.0 || MQRankSum < -12.5 || ReadPosRankSum < -8.0" \
-# #         --filter-name "PASS" \
-# #         -V {input} \
-# #         -O {output} 2>{log}
-# #         """
-# # ##############################
-# # # SelectVariants INDEL
-# # ##############################
-# # rule GATK_SelectVariants_INDEL:
-# #     input:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_raw_variants.vcf"
-# #     output:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_select_variants_INDEL.vcf"
-# #     log:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_select_variants_INDEL.log"
-# #     shell:
-# #         """
-# #         srun -T 24 -c 24 \
-# #         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-# #         -jar {GATK4} \
-# #         SelectVariants \
-# #         -select-type INDEL \
-# #         -V {input} \
-# #         -O {output} 2>{log}
-# #         """
-# # ##############################
-# # # VariantFiltration INDEL
-# # ##############################
-# # rule GATK_VariantFiltration_INDEL:
-# #     input:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_select_variants_INDEL.vcf"
-# #     output:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_INDEL.vcf"
-# #     log:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_INDEL.log"
-# #     shell:
-# #         """
-# #         srun -T 24 -c 24 \
-# #         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-# #         -jar {GATK4} \
-# #         VariantFiltration \
-# #         --filter-expression "QD < 2.0 || FS > 200.0 || SOR > 10.0 || MQRankSum < -12.5 || ReadPosRankSum < -8.0" \
-# #         --filter-name "PASS" \
-# #         -V {input} \
-# #         -O {output} 2>{log}
-# #         """
-# # ##############################
-# # # MergeVcfs -> vcf
-# # ##############################
-# # rule GATK_MergeVcfs:
-# #     input:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_SNP.vcf",
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_INDEL.vcf"
-# #     output:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_merge.vcf"
-# #     log:
-# #         "vcf/{sample}_gatk4_HaplotypeCaller_filtered_variants_merge.log"
-# #     shell:
-# #         """
-# #         srun -T 24 -c 24 \
-# #         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
-# #         -jar {GATK4} \
-# #         MergeVcfs \
-# #         -I {input[0]} \
-# #         -I {input[1]} \
-# #         -O {output} 2>{log}
-# #         """
+        """
