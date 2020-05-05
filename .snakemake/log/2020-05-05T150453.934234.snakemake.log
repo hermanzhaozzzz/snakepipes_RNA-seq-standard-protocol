@@ -1,5 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 73 of /gpfs/user/zhaohuanan/3.project/3.2020-05_BE3andBE4_RNA-seq/snakepipes_cutadapt-STARmapping-FPKM-sortBAM/Snakefile.py:
-Missing input files for rule all:
-../fpkm/test2_combined
-../fpkm/test_combined
