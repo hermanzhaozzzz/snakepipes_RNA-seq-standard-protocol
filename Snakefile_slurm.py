@@ -20,8 +20,8 @@
 # 1. cutadapt
 # 2. STAR alingment 
 # 3. picard change RG
-# 4. cufflinks calculate FPKM
-# 5. samtools sort by position
+# 4. samtools sort by position
+# 5. cufflinks calculate FPKM
 # 6. picard mark duplicates
 # 7. samtools build bam index
 
@@ -76,10 +76,10 @@ rule all:
         expand("../fix.fastq/293T-RNASeq-{sample}_R2_cutadapt.fq.gz",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.bam",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.fix_RG.bam",sample=SAMPLES),
-        expand("../fpkm/{sample}",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam",sample=SAMPLES),
+        expand("../fpkm/{sample}",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.bam",sample=SAMPLES),
-        expand("../bam/293T-RNASeq-{sample}_Aligned.out.bam.bai",sample=SAMPLES)
+        expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam.bai",sample=SAMPLES)
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # cutadapter
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -94,7 +94,6 @@ rule TruSeq_cutadapt:
         "../fix.fastq/293T-RNASeq-{sample}_cutadapt.log"
     shell:# using illumina universal adaptor
         """
-        srun -T 24 -c 24 \
         {CUTADAPT} -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25 \
         -m 55 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC \
         -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT \
@@ -116,7 +115,6 @@ rule STAR_mapping:
         "../bam/293T-RNASeq-{sample}_"
     shell:
         """
-        srun -T 24 -c 24 \
         {STAR} \
         --genomeDir {STAR_HG38_INDEX} \
         --runThreadN 24 \
@@ -139,24 +137,7 @@ rule add_RG_tag:
         tag = "'@RG\\tID:{sample}\\tSM:{sample}\\tPL:ILLUMINA'"
     shell:
         """
-        srun -T 24 -c 24 \
         samtools addreplacerg -r {params.tag} -@ 24 -O BAM -o {output} --reference {HG38_FA_DICT} {input}
-        """
-# ------------------------------------------------------------------------------------------>>>>>>>>>>
-# cufflinks calculate FPKM
-# ------------------------------------------------------------------------------------------>>>>>>>>>>     
-rule cufflinks_FPKM:
-    input:
-        "../bam/293T-RNASeq-{sample}_Aligned.out.bam"
-    output:
-        directory('../fpkm/{sample}')
-    shell:
-        """
-        srun -T 24 -c 24 \
-        {CUFFLINKS} -p 24 --library-type fr-firststrand \
-        -G {HG39_GTF} \
-        -o {output} \
-        {input}
         """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # samtools sort by position(not sort by name)
@@ -168,14 +149,28 @@ rule BAM_sort_by_position:
         "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
     shell:
         """
-        srun -T 24 -c 24 \
         samtools sort \
         -O BAM \
         -o {output} \
         -T {output}.temp \
         -@ 24 -m 4G \
         {input}
-        """    
+        """
+# ------------------------------------------------------------------------------------------>>>>>>>>>>
+# cufflinks calculate FPKM
+# ------------------------------------------------------------------------------------------>>>>>>>>>>     
+rule cufflinks_FPKM:
+    input:
+        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
+    output:
+        directory('../fpkm/{sample}')
+    shell:
+        """
+        {CUFFLINKS} -p 24 --library-type fr-firststrand \
+        -G {HG39_GTF} \
+        -o {output} \
+        {input}
+        """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # picard mark duplicate
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -189,7 +184,6 @@ rule BAM_mark_duplicate:
         "../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.log"
     shell:
         """
-        srun -T 24 -c 24 \
         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
         -jar {PICARD} MarkDuplicates \
         I={input} \
@@ -202,12 +196,11 @@ rule BAM_mark_duplicate:
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 rule BAM_index:
     input:
-        "../bam/293T-RNASeq-{sample}_Aligned.out.bam"
+        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
     output:
-        "../bam/293T-RNASeq-{sample}_Aligned.out.bam.bai"
+        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam.bai"
     shell:
         """
-        srun -T 24 -c 24 \
         samtools index -@ 24 \
         {input} \
         {output}
