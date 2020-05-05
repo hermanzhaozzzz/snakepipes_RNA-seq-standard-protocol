@@ -168,13 +168,15 @@ rule cufflinks_FPKM:
         "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
     output:
         directory('../fpkm/{sample}')
+    log:
+        "../fpkm/{sample}.log"
     shell:
         """
         srun -T 24 -c 24 \
         {CUFFLINKS} -p 24 --library-type fr-firststrand \
         -G {HG39_GTF} \
         -o {output} \
-        {input}
+        {input} 2>{log}
         """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # picard mark duplicate
