@@ -20,8 +20,8 @@
 # 1. cutadapt
 # 2. STAR alingment 
 # 3. picard change RG
-# 4. cufflinks calculate FPKM
-# 5. samtools sort by position
+# 4. samtools sort by position
+# 5. cufflinks calculate FPKM
 # 6. picard mark duplicates
 # 7. samtools build bam index
 
@@ -76,10 +76,10 @@ rule all:
         expand("../fix.fastq/293T-RNASeq-{sample}_R2_cutadapt.fq.gz",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.bam",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.fix_RG.bam",sample=SAMPLES),
-        expand("../fpkm/{sample}",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam",sample=SAMPLES),
+        expand("../fpkm/{sample}",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.bam",sample=SAMPLES),
-        expand("../bam/293T-RNASeq-{sample}_Aligned.out.bam.bai",sample=SAMPLES)
+        expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam.bai",sample=SAMPLES)
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # cutadapter
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -143,22 +143,6 @@ rule add_RG_tag:
         samtools addreplacerg -r {params.tag} -@ 24 -O BAM -o {output} --reference {HG38_FA_DICT} {input}
         """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
-# cufflinks calculate FPKM
-# ------------------------------------------------------------------------------------------>>>>>>>>>>     
-rule cufflinks_FPKM:
-    input:
-        "../bam/293T-RNASeq-{sample}_Aligned.out.bam"
-    output:
-        directory('../fpkm/{sample}')
-    shell:
-        """
-        srun -T 24 -c 24 \
-        {CUFFLINKS} -p 24 --library-type fr-firststrand \
-        -G {HG39_GTF} \
-        -o {output} \
-        {input}
-        """
-# ------------------------------------------------------------------------------------------>>>>>>>>>>
 # samtools sort by position(not sort by name)
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 rule BAM_sort_by_position:
@@ -175,7 +159,23 @@ rule BAM_sort_by_position:
         -T {output}.temp \
         -@ 24 -m 4G \
         {input}
-        """    
+        """
+# ------------------------------------------------------------------------------------------>>>>>>>>>>
+# cufflinks calculate FPKM
+# ------------------------------------------------------------------------------------------>>>>>>>>>>     
+rule cufflinks_FPKM:
+    input:
+        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
+    output:
+        directory('../fpkm/{sample}')
+    shell:
+        """
+        srun -T 24 -c 24 \
+        {CUFFLINKS} -p 24 --library-type fr-firststrand \
+        -G {HG39_GTF} \
+        -o {output} \
+        {input}
+        """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # picard mark duplicate
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -202,9 +202,9 @@ rule BAM_mark_duplicate:
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 rule BAM_index:
     input:
-        "../bam/293T-RNASeq-{sample}_Aligned.out.bam"
+        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
     output:
-        "../bam/293T-RNASeq-{sample}_Aligned.out.bam.bai"
+        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam.bai"
     shell:
         """
         srun -T 24 -c 24 \
