@@ -39,7 +39,7 @@ STAR = "/gpfs/build/bin/STAR"
 JAVA = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py37/bin/java"
 PICARD = "/gpfs/user/zhaohuanan/1.apps/picard/picard.jar"
 # cufflinks v2.2.1
-CUFFLINKS = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py27/bin/cufflinks"
+CUFFLINKS = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py36/bin/cufflinks"
 
 
 # --------------------------------------------------------------->>>>>>>
