@@ -54,21 +54,9 @@ HG39_GTF = "/home/zhaohuanan/zhaohn_HD/2.database/annotate_hg38/hg38_refseq_from
 # vars
 # --------------------------------------------------------------->>>>>>>
 SAMPLES = [
-    '1KJY-All-EMX1-2_combined',
-    'EM-1_combined',
-    'BE3-2_combined',
-    'BE4-1_combined',
-    '2BE4-All-1_combined',
-    'EM-2_combined',
-    'BE4-2_combined',
-    '2Mock-1_combined',
-    '1KJY-APODel-1_combined',
-    '1KJY-All-EMX1-1_combined',
-    'BE3-1_combined',
-    '1KJY-APODel-2_combined',
-    '2Vector-1_combined'
-#     'test2_combined',
-#     'test_combined'
+    "BE3-P2A-1",
+    "BE3-P2A-2",
+    "BE3-P2A-3"
 ]
 
 
