@@ -2,24 +2,21 @@
 
 ########################################################################
 # ZHAO Huanan
-# 2020-05-02
-# 293T RNASeq analysis pipeline
+# 2020-05-09
+# 293T RNA-Seq analysis pipeline
 ######################################################################## 
 # run on abyss
-# /home/zhaohuanan/zhaohn_HD/3.project/2.repeat_David_Liu_2020_NBT/3.test_snake/raw_bam
-
-
-
+# /home/zhaohuanan/zhaohn_HD/3.project/4.2020-05_BE3andBE4_RNA-seq_merge_KJY/snakepipes_cutadapt-STARmapping-FPKM-sortBAM
 
 # before this, make sure you have done fastqc + multiqc 
 # https://github.com/hermanzhaozzzz/snakepipes_fastqc-multiqc
-# and make a better trim
+# and add trim rule to make a better trim
 # --------------------------------------------------------------->>>>>>>
 # pipeline
 # --------------------------------------------------------------->>>>>>>
 # 1. cutadapt
 # 2. STAR alingment 
-# 3. picard change RG
+# 3. samtools addreplacerg - > RG
 # 4. samtools sort by position
 # 5. cufflinks calculate FPKM
 # 6. picard mark duplicates
@@ -38,6 +35,7 @@ STAR = "/gpfs/build/bin/STAR"
 # OpenJDK 64-Bit Server VM Zulu11.2+3 (build 11.0.1+13-LTS, mixed mode)
 JAVA = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py37/bin/java"
 PICARD = "/gpfs/user/zhaohuanan/1.apps/picard/picard.jar"
+GATK4 = "/home/zhaohuanan/zhaohn_HD/1.apps/GATK4/gatk-4.1.7.0/gatk-package-4.1.7.0-local.jar"
 # cufflinks v2.2.1
 CUFFLINKS = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py27/bin/cufflinks"
 
@@ -56,14 +54,21 @@ HG39_GTF = "/home/zhaohuanan/zhaohn_HD/2.database/annotate_hg38/hg38_refseq_from
 # vars
 # --------------------------------------------------------------->>>>>>>
 SAMPLES = [
-#      "BE3-1_combined",
-#      "BE3-2_combined",
-#      "BE4-1_combined",
-#      "BE4-2_combined",
-#      "EM-1_combined",
-#      "EM-2_combined"
-    "test_combined",
-    "test2_combined"
+    '1KJY-All-EMX1-2_combined',
+    'EM-1_combined',
+    'BE3-2_combined',
+    'BE4-1_combined',
+    '2BE4-All-1_combined',
+    'EM-2_combined',
+    'BE4-2_combined',
+    '2Mock-1_combined',
+    '1KJY-APODel-1_combined',
+    '1KJY-All-EMX1-1_combined',
+    'BE3-1_combined',
+    '1KJY-APODel-2_combined',
+    '2Vector-1_combined'
+#     'test2_combined',
+#     'test_combined'
 ]
 
 
@@ -77,9 +82,9 @@ rule all:
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.bam",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.fix_RG.bam",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam",sample=SAMPLES),
-        expand("../fpkm/{sample}",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.bam",sample=SAMPLES),
-        expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam.bai",sample=SAMPLES)
+        expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam.bai",sample=SAMPLES),
+        expand("../fpkm/{sample}",sample=SAMPLES)
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # cutadapter
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -94,12 +99,12 @@ rule TruSeq_cutadapt:
         "../fix.fastq/293T-RNASeq-{sample}_cutadapt.log"
     shell:# using illumina universal adaptor
         """
+        srun -T 24 -c 24 \
         {CUTADAPT} -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25 \
         -m 55 -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC \
         -A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT \
         -o {output[0]} -p {output[1]} {input[0]} {input[1]} > {log} 2>&1
-        """    
-
+        """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # STAR mapping
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -115,6 +120,7 @@ rule STAR_mapping:
         "../bam/293T-RNASeq-{sample}_"
     shell:
         """
+        srun -T 24 -c 24 \
         {STAR} \
         --genomeDir {STAR_HG38_INDEX} \
         --runThreadN 24 \
@@ -137,6 +143,7 @@ rule add_RG_tag:
         tag = "'@RG\\tID:{sample}\\tSM:{sample}\\tPL:ILLUMINA'"
     shell:
         """
+        srun -T 24 -c 24 \
         samtools addreplacerg -r {params.tag} -@ 24 -O BAM -o {output} --reference {HG38_FA_DICT} {input}
         """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -149,30 +156,15 @@ rule BAM_sort_by_position:
         "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
     shell:
         """
+        srun -T 24 -c 24 \
         samtools sort \
         -O BAM \
         -o {output} \
         -T {output}.temp \
-        -@ 24 -m 4G \
+        -@ 24  \
         {input}
         """
-# ------------------------------------------------------------------------------------------>>>>>>>>>>
-# cufflinks calculate FPKM
-# ------------------------------------------------------------------------------------------>>>>>>>>>>     
-rule cufflinks_FPKM:
-    input:
-        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
-    output:
-        directory('../fpkm/{sample}')
-    log:
-        "../fpkm/{sample}.log"
-    shell:
-        """
-        {CUFFLINKS} -p 24 --library-type fr-firststrand \
-        -G {HG39_GTF} \
-        -o {output} \
-        {input} 2>{log}
-        """
+#         -m 4G
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # picard mark duplicate
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
@@ -186,6 +178,7 @@ rule BAM_mark_duplicate:
         "../bam/293T-RNASeq-{sample}_Aligned_sort_MarkDup.log"
     shell:
         """
+        srun -T 24 -c 24 \
         {JAVA} -Xms90g -Xmx90g -XX:ParallelGCThreads=24 \
         -jar {PICARD} MarkDuplicates \
         I={input} \
@@ -203,7 +196,28 @@ rule BAM_index:
         "../bam/293T-RNASeq-{sample}_Aligned_sort.bam.bai"
     shell:
         """
+        srun -T 24 -c 24 \
         samtools index -@ 24 \
         {input} \
         {output}
         """
+# ------------------------------------------------------------------------------------------>>>>>>>>>>
+# cufflinks calculate FPKM for calling RNA CBE off target
+# https://github.com/hermanzhaozzzz/jupyter_call-RNA-CBE-off-target
+# ------------------------------------------------------------------------------------------>>>>>>>>>>     
+rule cufflinks_FPKM:
+    input:
+        "../bam/293T-RNASeq-{sample}_Aligned_sort.bam"
+    output:
+        directory('../fpkm/{sample}')
+    log:
+        "../fpkm/{sample}.log"
+    shell:
+        """
+        {CUFFLINKS} -p 24 --library-type fr-firststrand \
+        -G {HG39_GTF} \
+        -o {output} \
+        {input} 2>{log}
+        """
+# 常规算到这里就可以了
+# call SNP使用另一个snakefile
