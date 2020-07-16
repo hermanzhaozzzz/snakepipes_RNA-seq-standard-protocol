@@ -21,23 +21,40 @@
 # 5. cufflinks calculate FPKM
 # 6. picard mark duplicates
 # 7. samtools build bam index
-
+# 常规RNAseq的mapping和细节处理算到这里就可以了
+# call SNP使用另一个snakefile
 # --------------------------------------------------------------->>>>>>>
 # software
 # --------------------------------------------------------------->>>>>>>
-# cutadapt --v 1.18
-CUTADAPT = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py37/bin/cutadapt"
-# STAR --version 2.7.2b
-STAR = "/gpfs/build/bin/STAR"
-# JAVA version 1.8
-# openjdk 11.0.1 2018-10-16 LTS
-# OpenJDK Runtime Environment Zulu11.2+3 (build 11.0.1+13-LTS)
-# OpenJDK 64-Bit Server VM Zulu11.2+3 (build 11.0.1+13-LTS, mixed mode)
-JAVA = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py37/bin/java"
-PICARD = "/gpfs/user/zhaohuanan/1.apps/picard/picard.jar"
 GATK4 = "/home/zhaohuanan/zhaohn_HD/1.apps/GATK4/gatk-4.1.7.0/gatk-package-4.1.7.0-local.jar"
-# cufflinks v2.2.1
-CUFFLINKS = "/home/zhaohuanan/zhaohn_HD/1.apps/anaconda3/envs/py27/bin/cufflinks"
+
+
+# cutadapt v1.18
+# conda create -n cutadapt python=3.6 cutadapt=1.18
+CUTADAPT = "~/anaconda3/envs/cutadapt/bin/cutadapt"
+
+
+# --------------------------------------------------------------->>>>>>>
+# use conda to create a env contains below apps
+# --------------------------------------------------------------->>>>>>>
+# STAR --version 2.7.2b
+STAR = "~/anaconda3/envs/snakepipes_cutadapt-STARmapping-FPKM-sortBAM/bin/STAR"
+
+
+# JAVA version 1.8
+JAVA = "~/anaconda3/envs/snakepipes_cutadapt-STARmapping-FPKM-sortBAM/bin/java"
+
+
+# picard version 2.23
+PICARD = "~/anaconda3/envs/snakepipes_cutadapt-STARmapping-FPKM-sortBAM/bin/../share/picard-2.23.1-0/picard.jar"
+
+
+# cufflinks 
+CUFFLINKS = "~/anaconda3/envs/snakepipes_cutadapt-STARmapping-FPKM-sortBAM/bin/cufflinks"
+
+
+# samtools v1.10
+SAMTOOLS = "~/anaconda3/envs/snakepipes_cutadapt-STARmapping-FPKM-sortBAM/bin/samtools"
 
 
 # --------------------------------------------------------------->>>>>>>
@@ -47,16 +64,16 @@ HG38_FA = "/home/zhaohuanan/zhaohn_HD/2.database/bwa_hg38/hg38_only_chromosome.f
 HG38_FA_DICT = "/home/zhaohuanan/zhaohn_HD/2.database/bwa_hg38/hg38_only_chromosome.fa"
 # STAR --version 2.7.2b
 STAR_HG38_INDEX = "/home/zhaohuanan/zhaohn_HD/2.database/star_hg38"
-HG39_GTF = "/home/zhaohuanan/zhaohn_HD/2.database/annotate_hg38/hg38_refseq_from_ucsc.rm_XM_XR.fix_name.gtf"
+HG38_GTF = "/home/zhaohuanan/zhaohn_HD/2.database/annotate_hg38/20200714_ComprehensiveGeneAnnotation_Chr_gencode.v29.annotation.gtf"
 
 
 # --------------------------------------------------------------->>>>>>>
 # vars
 # --------------------------------------------------------------->>>>>>>
 SAMPLES = [
-    "BE3-P2A-1",
-    "BE3-P2A-2",
-    "BE3-P2A-3"
+    "BE4-0706-rep1",
+    "M2-0706-rep1"
+#    "test"
 ]
 
 
@@ -65,6 +82,8 @@ SAMPLES = [
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 rule all:
     input:
+        expand("../fix.fastq/293T-RNASeq-{sample}_R1.fastq.gz",sample=SAMPLES),
+        expand("../fix.fastq/293T-RNASeq-{sample}_R2.fastq.gz",sample=SAMPLES),
         expand("../fix.fastq/293T-RNASeq-{sample}_R1_cutadapt.fq.gz",sample=SAMPLES),
         expand("../fix.fastq/293T-RNASeq-{sample}_R2_cutadapt.fq.gz",sample=SAMPLES),
         expand("../bam/293T-RNASeq-{sample}_Aligned.out.bam",sample=SAMPLES),
@@ -78,8 +97,8 @@ rule all:
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 rule TruSeq_cutadapt:
     input:
-        "../reads/{sample}_R1.fastq.gz",
-        "../reads/{sample}_R2.fastq.gz"
+        "../fix.fastq/293T-RNASeq-{sample}_R1.fastq.gz",
+        "../fix.fastq/293T-RNASeq-{sample}_R2.fastq.gz"
     output:
         "../fix.fastq/293T-RNASeq-{sample}_R1_cutadapt.fq.gz",
         "../fix.fastq/293T-RNASeq-{sample}_R2_cutadapt.fq.gz"
@@ -132,7 +151,7 @@ rule add_RG_tag:
     shell:
         """
         srun -T 24 -c 24 \
-        samtools addreplacerg -r {params.tag} -@ 24 -O BAM -o {output} --reference {HG38_FA_DICT} {input}
+        {SAMTOOLS} addreplacerg -r {params.tag} -@ 24 -O BAM -o {output} --reference {HG38_FA_DICT} {input}
         """
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # samtools sort by position(not sort by name)
@@ -145,7 +164,7 @@ rule BAM_sort_by_position:
     shell:
         """
         srun -T 24 -c 24 \
-        samtools sort \
+        {SAMTOOLS} sort \
         -O BAM \
         -o {output} \
         -T {output}.temp \
@@ -185,7 +204,7 @@ rule BAM_index:
     shell:
         """
         srun -T 24 -c 24 \
-        samtools index -@ 24 \
+        {SAMTOOLS} index -@ 24 \
         {input} \
         {output}
         """
@@ -202,10 +221,11 @@ rule cufflinks_FPKM:
         "../fpkm/{sample}.log"
     shell:
         """
+        srun -T 24 -c 24 \
         {CUFFLINKS} -p 24 --library-type fr-firststrand \
-        -G {HG39_GTF} \
+        -G {HG38_GTF} \
         -o {output} \
         {input} 2>{log}
         """
-# 常规算到这里就可以了
+# 常规RNAseq的mapping和细节处理算到这里就可以了
 # call SNP使用另一个snakefile
