@@ -1,23 +1,32 @@
-FEATURECOUNTS = "/home/zhaohuanan/anaconda3/envs/testDE/bin/featureCounts"
-HG38_FA = "/home/zhaohuanan/zhaohn_HD/2.database/bwa_hg38/hg38_only_chromosome.fa"
-HG38_GTF = "/home/zhaohuanan/zhaohn_HD/2.database/annotate_hg38/20200714_ComprehensiveGeneAnnotation_Chr_gencode.v29.annotation.gtf"
-
+with os.popen("which featureCounts") as path:
+    FEATURECOUNTS = path.read().strip()
+    print('PATH cutadapt:', FEATURECOUNTS)
+    
+    
+    
+# human 
+# HG38_FA = "/home/zhaohuanan/zhaohn_HD/2.database/bwa_hg38/hg38_only_chromosome.fa"
+# HG38_GTF = "/home/zhaohuanan/zhaohn_HD/2.database/annotate_hg38/20200714_ComprehensiveGeneAnnotation_Chr_gencode.v29.annotation.gtf"
+# mouse
+HG38_FA = "/home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa"
+HG38_GTF = "/home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_annotation/genome_gencode_GRCm38.p6/gencode.vM25.annotation.gtf"
 # --------------------------------------------------------------->>>>>>>
 # vars
 # --------------------------------------------------------------->>>>>>>
+
+
+# 前面WT后面是TREAT
 SAMPLES = [
-    '2Mock-1_combined',# 前面试bg后面是exp
-    '2BE4-All-1_combined',
-    '2Vector-1_combined',
-#     'BE3-1_combined',
-#     'BE3-2_combined',
-    'BE4-1_combined',
-    'BE4-2_combined',
-    'EM-1_combined',
-    'EM-2_combined',
-    'BE4-0706-rep1',
-    'M2-0706-rep1'
+    "pcif1-WT-1",
+    "pcif1-WT-2",
+    "pcif1-WT-3",
+    "pcif1-WT-4",
+    "pcif1-KO-1",
+    "pcif1-KO-2",
+    "pcif1-KO-3",
+    "pcif1-KO-4"
 ]
+
 
 # ------------------------------------------------------------------------------------------>>>>>>>>>>
 # rule all
@@ -27,7 +36,6 @@ rule all:
         '../featureCounts/all_feature.txt'
 
 rule featureCounts:
-#     input:
     params:
         BAM = ' '.join(expand("../bam/293T-RNASeq-{sample}_Aligned_sort.bam",sample=SAMPLES))
     output:
