@@ -1,0 +1,100 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 6
+Job counts:
+	count	jobs
+	8	BAM_index
+	8	BAM_mark_duplicate
+	8	BAM_sort_by_position
+	8	NexteraSeq_cutadapt
+	8	STAR_mapping
+	8	add_RG_tag
+	1	all
+	49
+
+[Tue Feb  2 13:40:57 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-WT-1_R1.fq.gz, ../fastq/pcif1-WT-1_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-WT-1_cutadapt.log
+    jobid: 1
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz ../fastq/pcif1-WT-1_R1.fq.gz ../fastq/pcif1-WT-1_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-WT-1_cutadapt.log 2>&1
+        
+Submitted job 1 with external jobid '197812'.
+
+[Tue Feb  2 13:40:58 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-WT-3_R1.fq.gz, ../fastq/pcif1-WT-3_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-WT-3_cutadapt.log
+    jobid: 3
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz ../fastq/pcif1-WT-3_R1.fq.gz ../fastq/pcif1-WT-3_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-WT-3_cutadapt.log 2>&1
+        
+Submitted job 3 with external jobid '197813'.
+
+[Tue Feb  2 13:40:58 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-KO-1_R1.fq.gz, ../fastq/pcif1-KO-1_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-KO-1_cutadapt.log
+    jobid: 5
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz ../fastq/pcif1-KO-1_R1.fq.gz ../fastq/pcif1-KO-1_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-KO-1_cutadapt.log 2>&1
+        
+Submitted job 5 with external jobid '197814'.
+
+[Tue Feb  2 13:40:58 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-KO-2_R1.fq.gz, ../fastq/pcif1-KO-2_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-KO-2_cutadapt.log
+    jobid: 6
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz ../fastq/pcif1-KO-2_R1.fq.gz ../fastq/pcif1-KO-2_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-KO-2_cutadapt.log 2>&1
+        
+Submitted job 6 with external jobid '197815'.
+
+[Tue Feb  2 13:40:59 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-KO-4_R1.fq.gz, ../fastq/pcif1-KO-4_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-KO-4_cutadapt.log
+    jobid: 8
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz ../fastq/pcif1-KO-4_R1.fq.gz ../fastq/pcif1-KO-4_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-KO-4_cutadapt.log 2>&1
+        
+Submitted job 8 with external jobid '197816'.
+
+[Tue Feb  2 13:40:59 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-WT-2_R1.fq.gz, ../fastq/pcif1-WT-2_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-WT-2_cutadapt.log
+    jobid: 2
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz ../fastq/pcif1-WT-2_R1.fq.gz ../fastq/pcif1-WT-2_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-WT-2_cutadapt.log 2>&1
+        
+Submitted job 2 with external jobid '197817'.
+Terminating processes on user request, this might take some time.
+Will exit after finishing currently running jobs.
+Cancelling snakemake on user request.

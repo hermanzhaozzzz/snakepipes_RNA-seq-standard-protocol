@@ -1,0 +1,816 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cluster nodes: 6
+Job counts:
+	count	jobs
+	8	BAM_index
+	8	BAM_mark_duplicate
+	8	BAM_sort_by_position
+	8	NexteraSeq_cutadapt
+	8	STAR_mapping
+	8	add_RG_tag
+	1	all
+	49
+
+[Tue Feb  2 16:13:39 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-WT-1_R1.fq.gz, ../fastq/pcif1-WT-1_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-WT-1_cutadapt.log
+    jobid: 1
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz ../fastq/pcif1-WT-1_R1.fq.gz ../fastq/pcif1-WT-1_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-WT-1_cutadapt.log 2>&1
+        
+Submitted job 1 with external jobid '197880'.
+
+[Tue Feb  2 16:13:40 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-WT-3_R1.fq.gz, ../fastq/pcif1-WT-3_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-WT-3_cutadapt.log
+    jobid: 3
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz ../fastq/pcif1-WT-3_R1.fq.gz ../fastq/pcif1-WT-3_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-WT-3_cutadapt.log 2>&1
+        
+Submitted job 3 with external jobid '197881'.
+
+[Tue Feb  2 16:13:40 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-KO-1_R1.fq.gz, ../fastq/pcif1-KO-1_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-KO-1_cutadapt.log
+    jobid: 5
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz ../fastq/pcif1-KO-1_R1.fq.gz ../fastq/pcif1-KO-1_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-KO-1_cutadapt.log 2>&1
+        
+Submitted job 5 with external jobid '197882'.
+
+[Tue Feb  2 16:13:40 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-KO-2_R1.fq.gz, ../fastq/pcif1-KO-2_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-KO-2_cutadapt.log
+    jobid: 6
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz ../fastq/pcif1-KO-2_R1.fq.gz ../fastq/pcif1-KO-2_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-KO-2_cutadapt.log 2>&1
+        
+Submitted job 6 with external jobid '197883'.
+
+[Tue Feb  2 16:13:40 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-KO-4_R1.fq.gz, ../fastq/pcif1-KO-4_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-KO-4_cutadapt.log
+    jobid: 8
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz ../fastq/pcif1-KO-4_R1.fq.gz ../fastq/pcif1-KO-4_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-KO-4_cutadapt.log 2>&1
+        
+Submitted job 8 with external jobid '197884'.
+
+[Tue Feb  2 16:13:41 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-KO-3_R1.fq.gz, ../fastq/pcif1-KO-3_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-KO-3_cutadapt.log
+    jobid: 7
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz ../fastq/pcif1-KO-3_R1.fq.gz ../fastq/pcif1-KO-3_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-KO-3_cutadapt.log 2>&1
+        
+Submitted job 7 with external jobid '197885'.
+[Tue Feb  2 16:15:41 2021]
+Finished job 6.
+1 of 49 steps (2%) done
+
+[Tue Feb  2 16:15:41 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.log
+    jobid: 14
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-KO-2_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.log 2>&1
+        
+Submitted job 14 with external jobid '197886'.
+[Tue Feb  2 16:16:36 2021]
+Finished job 1.
+2 of 49 steps (4%) done
+
+[Tue Feb  2 16:16:36 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.log
+    jobid: 9
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-WT-1_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.log 2>&1
+        
+Submitted job 9 with external jobid '197887'.
+[Tue Feb  2 16:18:17 2021]
+Finished job 7.
+3 of 49 steps (6%) done
+
+[Tue Feb  2 16:18:17 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.log
+    jobid: 15
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-KO-3_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.log 2>&1
+        
+Submitted job 15 with external jobid '197888'.
+[Tue Feb  2 16:18:28 2021]
+Finished job 14.
+4 of 49 steps (8%) done
+
+[Tue Feb  2 16:18:28 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam
+    jobid: 22
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.bam
+    wildcards: sample=pcif1-KO-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-KO-2\tSM:pcif1-KO-2\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.bam
+        
+Submitted job 22 with external jobid '197889'.
+[Tue Feb  2 16:18:39 2021]
+Finished job 5.
+5 of 49 steps (10%) done
+
+[Tue Feb  2 16:18:39 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.log
+    jobid: 13
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-KO-1_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.log 2>&1
+        
+Submitted job 13 with external jobid '197890'.
+[Tue Feb  2 16:18:50 2021]
+Finished job 22.
+6 of 49 steps (12%) done
+
+[Tue Feb  2 16:18:50 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam
+    jobid: 30
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-KO-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam
+        
+Submitted job 30 with external jobid '197891'.
+[Tue Feb  2 16:19:12 2021]
+Finished job 30.
+7 of 49 steps (14%) done
+
+[Tue Feb  2 16:19:12 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.log
+    jobid: 38
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.log
+        
+Submitted job 38 with external jobid '197892'.
+[Tue Feb  2 16:19:47 2021]
+Finished job 8.
+8 of 49 steps (16%) done
+
+[Tue Feb  2 16:19:47 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-WT-2_R1.fq.gz, ../fastq/pcif1-WT-2_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-WT-2_cutadapt.log
+    jobid: 2
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz ../fastq/pcif1-WT-2_R1.fq.gz ../fastq/pcif1-WT-2_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-WT-2_cutadapt.log 2>&1
+        
+Submitted job 2 with external jobid '197893'.
+[Tue Feb  2 16:20:09 2021]
+Finished job 9.
+9 of 49 steps (18%) done
+
+[Tue Feb  2 16:20:09 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam.bai
+    jobid: 46
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam.bai
+        
+Submitted job 46 with external jobid '197894'.
+[Tue Feb  2 16:20:19 2021]
+Finished job 46.
+10 of 49 steps (20%) done
+[Tue Feb  2 16:20:20 2021]
+Finished job 3.
+11 of 49 steps (22%) done
+
+[Tue Feb  2 16:20:20 2021]
+rule NexteraSeq_cutadapt:
+    input: ../fastq/pcif1-WT-4_R1.fq.gz, ../fastq/pcif1-WT-4_R2.fq.gz
+    output: ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz
+    log: ../fix.fastq/293T-RNASeq-pcif1-WT-4_cutadapt.log
+    jobid: 4
+    reason: Missing output files: ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/cutadapt -j 24 --times 1  -e 0.1  -O 3  --quality-cutoff 25         -m 55 -a TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG         -A GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAG         -o ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz -p ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz ../fastq/pcif1-WT-4_R1.fq.gz ../fastq/pcif1-WT-4_R2.fq.gz > ../fix.fastq/293T-RNASeq-pcif1-WT-4_cutadapt.log 2>&1
+        
+Submitted job 4 with external jobid '197895'.
+
+[Tue Feb  2 16:20:20 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam
+    jobid: 17
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.bam
+    wildcards: sample=pcif1-WT-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-WT-1\tSM:pcif1-WT-1\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.bam
+        
+Submitted job 17 with external jobid '197896'.
+[Tue Feb  2 16:20:54 2021]
+Finished job 17.
+12 of 49 steps (24%) done
+
+[Tue Feb  2 16:20:54 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.log
+    jobid: 11
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-WT-3_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.log 2>&1
+        
+Submitted job 11 with external jobid '197897'.
+[Tue Feb  2 16:22:55 2021]
+Finished job 4.
+13 of 49 steps (27%) done
+
+[Tue Feb  2 16:22:55 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam
+    jobid: 25
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-WT-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam
+        
+Submitted job 25 with external jobid '197898'.
+[Tue Feb  2 16:23:07 2021]
+Finished job 15.
+14 of 49 steps (29%) done
+
+[Tue Feb  2 16:23:07 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam
+    jobid: 23
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.bam
+    wildcards: sample=pcif1-KO-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-KO-3\tSM:pcif1-KO-3\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.bam
+        
+Submitted job 23 with external jobid '197899'.
+[Tue Feb  2 16:23:29 2021]
+Finished job 38.
+15 of 49 steps (31%) done
+[Tue Feb  2 16:23:30 2021]
+Finished job 25.
+16 of 49 steps (33%) done
+
+[Tue Feb  2 16:23:30 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.log
+    jobid: 33
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.log
+        
+Submitted job 33 with external jobid '197900'.
+
+[Tue Feb  2 16:23:30 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.log
+    jobid: 16
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-KO-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-KO-4_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.log 2>&1
+        
+Submitted job 16 with external jobid '197901'.
+[Tue Feb  2 16:23:40 2021]
+Finished job 23.
+17 of 49 steps (35%) done
+
+[Tue Feb  2 16:23:40 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam.bai
+    jobid: 41
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam.bai
+        
+Submitted job 41 with external jobid '197902'.
+[Tue Feb  2 16:23:51 2021]
+Finished job 41.
+18 of 49 steps (37%) done
+[Tue Feb  2 16:23:52 2021]
+Finished job 2.
+19 of 49 steps (39%) done
+
+[Tue Feb  2 16:23:52 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.log
+    jobid: 12
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-WT-4_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.log 2>&1
+        
+Submitted job 12 with external jobid '197903'.
+
+[Tue Feb  2 16:23:52 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam
+    jobid: 31
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-KO-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam
+        
+Submitted job 31 with external jobid '197904'.
+[Tue Feb  2 16:24:14 2021]
+Finished job 13.
+20 of 49 steps (41%) done
+
+[Tue Feb  2 16:24:14 2021]
+rule STAR_mapping:
+    input: ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz
+    output: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.bam
+    log: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.log
+    jobid: 10
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.bam; Input files updated by another job: ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz
+    wildcards: sample=pcif1-WT-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/STAR         --genomeDir /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/star_index_150bp         --runThreadN 24         --readFilesIn ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz         --readFilesCommand zcat         --outFileNamePrefix ../bam/293T-RNASeq-pcif1-WT-2_         --outSAMtype BAM Unsorted         --outSAMstrandField intronMotif         --outFilterIntronMotifs RemoveNoncanonical > ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.log 2>&1
+        
+Submitted job 10 with external jobid '197905'.
+[Tue Feb  2 16:24:48 2021]
+Finished job 31.
+21 of 49 steps (43%) done
+
+[Tue Feb  2 16:24:48 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.log
+    jobid: 39
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.log
+        
+Submitted job 39 with external jobid '197906'.
+[Tue Feb  2 16:27:12 2021]
+Finished job 12.
+22 of 49 steps (45%) done
+
+[Tue Feb  2 16:27:13 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam
+    jobid: 21
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.bam
+    wildcards: sample=pcif1-KO-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-KO-1\tSM:pcif1-KO-1\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.bam
+        
+Submitted job 21 with external jobid '197907'.
+[Tue Feb  2 16:27:58 2021]
+Finished job 21.
+23 of 49 steps (47%) done
+
+[Tue Feb  2 16:27:58 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam
+    jobid: 20
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.bam
+    wildcards: sample=pcif1-WT-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-WT-4\tSM:pcif1-WT-4\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.bam
+        
+Submitted job 20 with external jobid '197908'.
+[Tue Feb  2 16:28:19 2021]
+Finished job 11.
+24 of 49 steps (49%) done
+
+[Tue Feb  2 16:28:19 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam
+    jobid: 29
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-KO-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam
+        
+Submitted job 29 with external jobid '197909'.
+[Tue Feb  2 16:28:20 2021]
+Finished job 20.
+25 of 49 steps (51%) done
+
+[Tue Feb  2 16:28:20 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam
+    jobid: 28
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-WT-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam
+        
+Submitted job 28 with external jobid '197910'.
+[Tue Feb  2 16:29:04 2021]
+Finished job 10.
+26 of 49 steps (53%) done
+
+[Tue Feb  2 16:29:04 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam
+    jobid: 18
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.bam
+    wildcards: sample=pcif1-WT-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-WT-2\tSM:pcif1-WT-2\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.bam
+        
+Submitted job 18 with external jobid '197911'.
+[Tue Feb  2 16:29:05 2021]
+Finished job 28.
+27 of 49 steps (55%) done
+
+[Tue Feb  2 16:29:05 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.log
+    jobid: 36
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.log
+        
+Submitted job 36 with external jobid '197912'.
+[Tue Feb  2 16:29:15 2021]
+Finished job 29.
+28 of 49 steps (57%) done
+
+[Tue Feb  2 16:29:15 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.log
+    jobid: 37
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.log
+        
+Submitted job 37 with external jobid '197913'.
+[Tue Feb  2 16:29:27 2021]
+Finished job 33.
+29 of 49 steps (59%) done
+[Tue Feb  2 16:29:27 2021]
+Finished job 16.
+30 of 49 steps (61%) done
+
+[Tue Feb  2 16:29:27 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam.bai
+    jobid: 45
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-1
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam.bai
+        
+Submitted job 45 with external jobid '197914'.
+
+[Tue Feb  2 16:29:27 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam.bai
+    jobid: 44
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam.bai
+        
+Submitted job 44 with external jobid '197915'.
+[Tue Feb  2 16:29:38 2021]
+Finished job 18.
+31 of 49 steps (63%) done
+
+[Tue Feb  2 16:29:38 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam
+    jobid: 26
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-WT-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam
+        
+Submitted job 26 with external jobid '197916'.
+[Tue Feb  2 16:29:39 2021]
+Finished job 44.
+32 of 49 steps (65%) done
+[Tue Feb  2 16:29:49 2021]
+Finished job 45.
+33 of 49 steps (67%) done
+[Tue Feb  2 16:30:21 2021]
+Finished job 26.
+34 of 49 steps (69%) done
+
+[Tue Feb  2 16:30:21 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam.bai
+    jobid: 47
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam.bai
+        
+Submitted job 47 with external jobid '197917'.
+
+[Tue Feb  2 16:30:22 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.log
+    jobid: 34
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.log
+        
+Submitted job 34 with external jobid '197918'.
+
+[Tue Feb  2 16:30:22 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam.bai
+    jobid: 42
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-2
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam.bai
+        
+Submitted job 42 with external jobid '197919'.
+[Tue Feb  2 16:30:43 2021]
+Finished job 47.
+35 of 49 steps (71%) done
+[Tue Feb  2 16:30:44 2021]
+Finished job 42.
+36 of 49 steps (73%) done
+[Tue Feb  2 16:33:58 2021]
+Finished job 39.
+37 of 49 steps (76%) done
+[Tue Feb  2 16:34:30 2021]
+Finished job 36.
+38 of 49 steps (78%) done
+[Tue Feb  2 16:38:29 2021]
+Finished job 34.
+39 of 49 steps (80%) done
+[Tue Feb  2 16:41:12 2021]
+Finished job 37.
+40 of 49 steps (82%) done
+
+[Tue Feb  2 16:41:13 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam
+    jobid: 19
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.bam
+    wildcards: sample=pcif1-WT-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-WT-3\tSM:pcif1-WT-3\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.bam
+        
+Submitted job 19 with external jobid '197923'.
+
+[Tue Feb  2 16:41:13 2021]
+rule add_RG_tag:
+    input: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam
+    jobid: 24
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.bam
+    wildcards: sample=pcif1-KO-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools addreplacerg -r '@RG\tID:pcif1-KO-4\tSM:pcif1-KO-4\tPL:ILLUMINA' -@ 24 -O BAM -o ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam --reference /home/zhaohuanan/zhaohn_HD/2.database/db_genomes/genome_fa/genome_gencode_GRCm38.p6/GRCm38.p6.genome.fa ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.bam
+        
+Submitted job 24 with external jobid '197924'.
+[Tue Feb  2 16:42:04 2021]
+Finished job 19.
+41 of 49 steps (84%) done
+
+[Tue Feb  2 16:42:04 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam
+    jobid: 27
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-WT-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam
+        
+[Tue Feb  2 16:42:04 2021]
+Finished job 24.
+42 of 49 steps (86%) done
+Submitted job 27 with external jobid '197925'.
+
+[Tue Feb  2 16:42:05 2021]
+rule BAM_sort_by_position:
+    input: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam
+    jobid: 32
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam
+    wildcards: sample=pcif1-KO-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools sort         -O BAM         -o ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam         -T ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam.temp         -@ 24          ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam
+        
+Submitted job 32 with external jobid '197926'.
+[Tue Feb  2 16:43:07 2021]
+Finished job 27.
+43 of 49 steps (88%) done
+
+[Tue Feb  2 16:43:07 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam.bai
+    jobid: 43
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam.bai
+        
+[Tue Feb  2 16:43:07 2021]
+Finished job 32.
+44 of 49 steps (90%) done
+Submitted job 43 with external jobid '197927'.
+
+[Tue Feb  2 16:43:07 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.log
+    jobid: 35
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam
+    wildcards: sample=pcif1-WT-3
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.log
+        
+Submitted job 35 with external jobid '197928'.
+
+[Tue Feb  2 16:43:07 2021]
+rule BAM_index:
+    input: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam.bai
+    jobid: 48
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam.bai; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/samtools index -@ 24         ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam         ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam.bai
+        
+Submitted job 48 with external jobid '197929'.
+
+[Tue Feb  2 16:43:08 2021]
+rule BAM_mark_duplicate:
+    input: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam
+    output: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.matrix
+    log: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.log
+    jobid: 40
+    reason: Missing output files: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.bam; Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam
+    wildcards: sample=pcif1-KO-4
+
+
+        /home/zhaohuanan/zhaohn_HD/miniconda3/bin/java -Xms10g -Xmx10g -XX:ParallelGCThreads=24         -jar /home/zhaohuanan/zhaohn_HD/1.apps/picard/picard.jar MarkDuplicates         I=../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam         O=../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.bam         M=../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.matrix         ASO=coordinate 2>../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.log
+        
+Submitted job 40 with external jobid '197930'.
+[Tue Feb  2 16:43:28 2021]
+Finished job 43.
+45 of 49 steps (92%) done
+[Tue Feb  2 16:43:28 2021]
+Finished job 48.
+46 of 49 steps (94%) done
+[Tue Feb  2 16:52:39 2021]
+Finished job 35.
+47 of 49 steps (96%) done
+[Tue Feb  2 16:55:02 2021]
+Finished job 40.
+48 of 49 steps (98%) done
+
+[Tue Feb  2 16:55:02 2021]
+localrule all:
+    input: ../fastq/pcif1-WT-1_R1.fq.gz, ../fastq/pcif1-WT-2_R1.fq.gz, ../fastq/pcif1-WT-3_R1.fq.gz, ../fastq/pcif1-WT-4_R1.fq.gz, ../fastq/pcif1-KO-1_R1.fq.gz, ../fastq/pcif1-KO-2_R1.fq.gz, ../fastq/pcif1-KO-3_R1.fq.gz, ../fastq/pcif1-KO-4_R1.fq.gz, ../fastq/pcif1-WT-1_R2.fq.gz, ../fastq/pcif1-WT-2_R2.fq.gz, ../fastq/pcif1-WT-3_R2.fq.gz, ../fastq/pcif1-WT-4_R2.fq.gz, ../fastq/pcif1-KO-1_R2.fq.gz, ../fastq/pcif1-KO-2_R2.fq.gz, ../fastq/pcif1-KO-3_R2.fq.gz, ../fastq/pcif1-KO-4_R2.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam.bai
+    jobid: 0
+    reason: Input files updated by another job: ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.bam, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R1_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam.bai, ../fix.fastq/293T-RNASeq-pcif1-WT-1_R1_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.bam, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R2_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort_MarkDup.bam, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R1_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-3_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-4_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.fix_RG.bam, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R1_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-3_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-KO-4_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-KO-2_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned.out.bam, ../fix.fastq/293T-RNASeq-pcif1-WT-2_R2_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-WT-3_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort_MarkDup.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-WT-2_Aligned_sort_MarkDup.bam, ../fix.fastq/293T-RNASeq-pcif1-KO-2_R1_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-KO-2_Aligned_sort_MarkDup.bam, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R2_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.bam, ../bam/293T-RNASeq-pcif1-WT-1_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-WT-1_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-4_Aligned.out.fix_RG.bam, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-1_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-3_R2_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-WT-4_R1_cutadapt.fq.gz, ../bam/293T-RNASeq-pcif1-KO-3_Aligned_sort.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned.out.fix_RG.bam, ../bam/293T-RNASeq-pcif1-KO-1_Aligned_sort.bam.bai, ../bam/293T-RNASeq-pcif1-WT-4_Aligned.out.bam, ../fix.fastq/293T-RNASeq-pcif1-KO-4_R1_cutadapt.fq.gz, ../fix.fastq/293T-RNASeq-pcif1-KO-3_R1_cutadapt.fq.gz
+
+[Tue Feb  2 16:55:02 2021]
+Finished job 0.
+49 of 49 steps (100%) done
+Complete log: /gpfs/user/zhaohuanan/3.project/2021_Other_projects/2021_CTT/snakepipes_RNA-seq-standard-protocol/.snakemake/log/2021-02-02T161339.421651.snakemake.log
